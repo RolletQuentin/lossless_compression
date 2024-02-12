@@ -21,3 +21,12 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
+
+# For LaTeX document
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz

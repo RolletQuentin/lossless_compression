@@ -1,0 +1,74 @@
+\LoadClass[a4paper,12pt,french]{article} % Classe du document
+
+%--------------------- Packages ------------------------
+
+\RequirePackage{babel} %Langue du document
+\RequirePackage[utf8]{inputenc} %Caractères spéciaux
+\RequirePackage[section]{placeins}%Pour placement de section
+\RequirePackage[T1]{fontenc} %Quelques lettres qui sont pas inclus dans UTF-8
+\RequirePackage{float} %Pour placement d'images
+\RequirePackage{graphicx} %Paquet pour insérer des images
+\RequirePackage[justification=centering]{caption} %Pour les légendes centralisées
+\RequirePackage{subcaption}
+\RequirePackage{wallpaper}
+\RequirePackage{nomencl}
+%\makenomenclature
+\RequirePackage{fancyhdr}
+%\pagestyle{fancy}
+%\fancyheadoffset{1cm}
+\setlength{\headheight}{2cm}
+\RequirePackage{url}
+\RequirePackage[hidelinks]{hyperref}%Paquet pour insérer légendes dans des sous-figures comme Figure 1a, 1b
+\RequirePackage[left=2.5cm,right=2.5cm,top=4cm,bottom=4cm]{geometry} %Configuration de la page
+\RequirePackage{tikz}
+\RequirePackage{pdfpages}
+
+
+\chead{} %Affichage du logo entreprise au top center de la page
+\lhead{\includegraphics[height=1cm]{./assets/cytech.png}}
+\rhead{}
+\rfoot{2023}
+\cfoot{\thepage}
+\lfoot{Quentin Rollet}
+
+\title{Stage ING1}
+
+\begin{document}
+
+% Page de garde
+
+\begin{titlepage}
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+	\center{
+        \textsc{\LARGE
+        \includegraphics[height=5cm]{./assets/cytech.png}
+        } \\[1cm]
+        
+        \HRule\\[0.4cm]
+        { \huge \bfseries Compression sans perte de données \\[0.15cm] }
+        \HRule\\[1.5cm]
+
+        Romain Dujol\\
+        
+        2023--2024\\[5cm]
+        
+        Quentin ROLLET\\
+	ING2
+    }
+
+\end{titlepage}
+
+% Supprime la numérotation sur la page de garde
+\pagenumbering{gobble}
+
+\tableofcontents
+\newpage
+
+% Commence la numérotation des pages à partir d'ici
+\pagenumbering{arabic}
+
+\pagestyle{fancy}
+
+
+
+\end{document}
