@@ -1,4 +1,4 @@
-module Main where
+module Main (main) where
 
 import Test.HUnit
 import Test.QuickCheck
@@ -7,7 +7,10 @@ import RLETest
 main :: IO ()
 main = do
     putStrLn "Running all tests:"
-    runTestTT $ TestList
+    _ <- runTestTT $ TestList
         [
-            RLETest.testCompress
+            RLETest.testCompress,
+            RLETest.testUncompress
         ]
+    quickCheck propertyCompressUncompress
+    putStrLn "All test runned."
