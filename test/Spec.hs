@@ -1,2 +1,13 @@
+module Main where
+
+import Test.HUnit
+import Test.QuickCheck
+import RLETest
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = do
+    putStrLn "Running all tests:"
+    runTestTT $ TestList
+        [
+            RLETest.testCompress
+        ]
