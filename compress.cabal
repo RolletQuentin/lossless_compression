@@ -56,7 +56,13 @@ test-suite compress-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      LZTest.LZ78Test
+      LZTest.LZWTest
       RLETest
+      StatisticTest.EncodingTreeTest
+      StatisticTest.HuffmanTest
+      StatisticTest.ShannonFanoTest
+      StatisticTest.SourceTest
       Paths_compress
   hs-source-dirs:
       test
