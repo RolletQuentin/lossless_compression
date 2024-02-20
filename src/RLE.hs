@@ -1,7 +1,7 @@
 {- |
   Module      : RLE
   Description : An implementation of the run-length encoding method
-  Maintainer  : ???
+  Maintainer  : Noailles Valentin
 -}
 module RLE(compress, uncompress) where
 

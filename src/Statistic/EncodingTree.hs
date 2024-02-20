@@ -1,7 +1,7 @@
 {- |
   Module : Statistic.EncodingTree
   Description : A module representing a binary tree for binary encoding
-  Maintainer : ???
+  Maintainer : Noailles Valentin
 -}
 module Statistic.EncodingTree(EncodingTree(..), isLeaf, count, has, encode, decodeOnce, decode, meanLength, compress, uncompress) where
 
@@ -23,31 +23,69 @@ count (EncodingNode cnt _ _) = cnt
 
 -- | Search for symbol in encoding tree
 has :: Eq a => EncodingTree a -> a -> Bool
-_ `has` _ = undefined -- TODO
+has (EncodingLeaf _ ltr) target = ltr == target
+has (EncodingNode _ lft rgt) ltr = has lft ltr || has rgt ltr
 
 -- | Computes the binary code of symbol using encoding tree
 -- If computation is not possible, returns `Nothing`.
 encode :: Eq a => EncodingTree a -> a -> Maybe [Bit]
-encode _ _ = undefined -- TODO
+encode (EncodingLeaf _ ltr) target
+  | ltr == target = Just []
+  | otherwise     = Nothing
+encode (EncodingNode _ lft rgt) target
+  | has lft target = fmap (Zero:) (encode lft target)
+  | has rgt target = fmap (One:) (encode rgt target)
+  | otherwise      = Nothing
 
 -- | Computes the first symbol from list of bits using encoding tree and also returns the list of bits still to process
 -- If computation is not possible, returns `Nothing`.
 decodeOnce :: EncodingTree a -> [Bit] -> Maybe (a, [Bit])
-decodeOnce _ _ = undefined -- TODO
+decodeOnce (EncodingLeaf _ ltr) rest = Just (ltr, rest)
+decodeOnce (EncodingNode _ lft rgt) (b:rest)
+  | b == Zero = decodeOnce lft rest
+  | b == One  = decodeOnce rgt rest
+decodeOnce _ _ = Nothing
 
 -- | Computes list of symbols from list of bits using encoding tree
 decode :: EncodingTree a -> [Bit] -> Maybe [a]
-decode _ _ = undefined -- TODO
+decode _ [] = Just []
+decode tree bits = do
+  (ltr, rest) <- decodeOnce tree bits
+  decodedRest <- decode tree rest
+  Just (ltr : decodedRest)
 
 -- | Mean length of the binary encoding
 meanLength :: EncodingTree a -> Double
-meanLength _ = undefined -- TODO
+meanLength tree = 
+  fromIntegral (meanLengthHelper tree 0) / fromIntegral (count tree)
+    where
+      meanLengthHelper :: EncodingTree a -> Int -> Int
+      meanLengthHelper (EncodingLeaf nbr _) depth = nbr * depth
+      meanLengthHelper (EncodingNode _ lft rgt) depth =
+        let left = meanLengthHelper lft (depth + 1)
+            right = meanLengthHelper rgt (depth + 1)
+        in left + right -- check if i can remove in by putting 2 let instead of 1
 
 -- | Compress method using a function generating encoding tree and also returns generated encoding tree
 compress :: Eq a => ([a] -> Maybe (EncodingTree a)) -> [a] -> (Maybe (EncodingTree a), [Bit])
-compress _ _ = undefined -- TODO
+compress treeGenerator text = 
+  case treeGenerator text of
+    Just tree -> case encodeText tree text of 
+                  Just bits -> (Just tree, bits)
+                  Nothing   -> (Nothing, []) 
+    Nothing   -> (Nothing, [])
+    where
+      encodeText :: Eq a => EncodingTree a -> [a] -> Maybe [Bit]
+      encodeText _ [] = Just []
+      encodeText tree (ltr:rest) = case encode tree ltr of
+        Just bits -> case encodeText tree rest of 
+                      Just bit -> Just (bits ++ bit)
+                      Nothing  -> Nothing
+        Nothing   -> Just []
 
 -- | Uncompress method using previously generated encoding tree
 -- If input cannot be uncompressed, returns `Nothing`
 uncompress :: (Maybe (EncodingTree a), [Bit]) -> Maybe [a]
-uncompress _ = undefined -- TODO
+uncompress (Just tree, bits) = decode tree bits
+uncompress _ = Nothing
+
