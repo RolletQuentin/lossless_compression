@@ -31,7 +31,8 @@ testEncodingTree = TestList
     ]
 
 
--- Votre propriété pour Huffman
+-- QuickCheck property for Huffman compress/uncompress: uncompressed list
+-- should be the same than before
 propertyHuffmanCompressUncompress :: Property
 propertyHuffmanCompressUncompress =
   forAll (arbitrary `suchThat` (\xs -> length xs >= 2)) $ \xs ->
@@ -39,7 +40,9 @@ propertyHuffmanCompressUncompress =
         uncompressed = uncompress (encodingTree, compressed)
     in counterexample ("Input: " ++ xs) $ encodingTree === Statistic.Huffman.tree xs .&&. uncompressed === Just xs
 
--- Votre propriété pour Shannon-Fano
+
+-- QuickCheck property for Shannon-Fano compress/uncompress: uncompressed list
+-- should be the same than before
 propertyShannonFanoCompressUncompress :: Property
 propertyShannonFanoCompressUncompress =
   forAll (arbitrary `suchThat` (\xs -> length xs >= 2)) $ \xs ->
