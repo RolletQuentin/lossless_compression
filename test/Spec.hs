@@ -64,13 +64,13 @@ main = do
     --     ]
     -- putStrLn "Shannon-Fano tests are finnished.\n"
 
-    -- putStrLn "Running test for Source..."
-    -- _ <- runTestTT $ TestList
-    --     [
-    --         StatisticTest.SourceTest.testOccurrences,
-    --         StatisticTest.SourceTest.testEntropy,
-    --         StatisticTest.SourceTest.testOrderedCounts
-    --     ]
-    -- putStrLn "Source tests are finnished.\n"
+    putStrLn "Running test for Source..."
+    _ <- runTestTT $ TestList
+        [
+            StatisticTest.SourceTest.testOccurrences,
+            -- StatisticTest.SourceTest.testEntropy,
+            StatisticTest.SourceTest.testOrderedCounts
+        ]
+    putStrLn "Source tests are finnished.\n"
 
     putStrLn "All test runned."
