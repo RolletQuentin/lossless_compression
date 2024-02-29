@@ -48,6 +48,12 @@ decodeOnce _ _ = Nothing
 
 -- | Computes list of symbols from list of bits using encoding tree
 decode :: EncodingTree a -> [Bit] -> Maybe [a]
+decode (EncodingLeaf nbr ltr) _ = 
+  Just (decodeOnlyLeaf nbr ltr)
+    where
+      decodeOnlyLeaf :: Int -> a -> [a]
+      decodeOnlyLeaf 0 _ = []
+      decodeOnlyLeaf nbr ltr = ltr:(decodeOnlyLeaf (nbr - 1) ltr)
 decode _ [] = Just []
 decode tree bits = do
   (ltr, rest) <- decodeOnce tree bits
@@ -77,6 +83,7 @@ compress treeGenerator text =
     where
       encodeText :: Eq a => EncodingTree a -> [a] -> Maybe [Bit]
       encodeText _ [] = Just []
+      encodeText (EncodingLeaf _ _) _ = Just []
       encodeText tree (ltr:rest) = case encode tree ltr of
         Just bits -> case encodeText tree rest of 
                       Just bit -> Just (bits ++ bit)
