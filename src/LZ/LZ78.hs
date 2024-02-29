@@ -3,8 +3,8 @@
   Description : An implementation of LZ78 method
   Maintainer  : Marc-Antoine VERGNET
 -}
--- (compress, uncompress) 
-module LZ.LZ78 where
+ 
+module LZ.LZ78(compress, uncompress) where
 
 import LZ.Dictionaries
 
