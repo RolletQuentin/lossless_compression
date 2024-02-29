@@ -23,14 +23,14 @@ main = do
     quickCheck propertyCompressUncompress
     putStrLn "RLE tests are finnished.\n"
 
-    -- putStrLn "Running test for LZ78..."
-    -- _ <- runTestTT $ TestList
-    --     [
-    --         LZTest.LZ78Test.testLZ78Compress,
-    --         LZTest.LZ78Test.testLZ78Uncompress
-    --     ]
-    -- quickCheck propertyLZ78CompressUncompress
-    -- putStrLn "LZ78 tests are finnished.\n"
+    putStrLn "Running test for LZ78..."
+    _ <- runTestTT $ TestList
+        [
+            LZTest.LZ78Test.testLZ78Compress,
+            LZTest.LZ78Test.testLZ78Uncompress
+        ]
+    quickCheck propertyLZ78CompressUncompress
+    putStrLn "LZ78 tests are finnished.\n"
 
     -- putStrLn "Running test for LZW..."
     -- _ <- runTestTT $ TestList
