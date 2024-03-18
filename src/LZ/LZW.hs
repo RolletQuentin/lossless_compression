@@ -13,10 +13,12 @@ import LZ.Dictionaries
 import Data.List (elemIndex)
 -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
+
 -- | LZW compress method
 compress :: String -> [Int]
 compress [] = []
-compress message = compress_method message 2 [] []
+compress message = compress_method message 2 [] ascii
 
 compress_method :: String -> Int -> [Int] -> [String] -> [Int]
 -- Correspond à :  compress_method(message, n, code, dictionnaire) = code
@@ -36,8 +38,6 @@ compress_method message length_message list_int dictionary =
       Just index -> [index]
       Nothing -> []
 
-
-
 -- Tous les autres cas
 compress_method message n list_int dictionary
   -- Soit message dans liste et n+1 < length(message)
@@ -51,10 +51,11 @@ compress_method message n list_int dictionary
     new_message = drop (n-1) message
     patern = take n message
     maybeIndex = elemIndex patern updated_dictionary
+    -- On converti le maybeIndex en Index car on veut un Int et non un Maybe Int
     index_patern = case maybeIndex of
-      Just index -> [index]
-      Nothing -> []
-    new_list_int = list_int ++ [maybeIndex]
+      Just index -> index
+      Nothing -> -1
+    new_list_int = list_int ++ [index_patern]
 
 
 -- | LZW uncompress method
