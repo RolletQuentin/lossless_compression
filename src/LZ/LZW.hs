@@ -30,7 +30,7 @@ compress_method [] _ list_int _ = list_int
 -- Tous les autres cas
 compress_method message n list_int dictionary
   -- Condition d'arrêt, length(message) = n  <=>  mon dernier patern est un patern que je connais.
-  | n == length message = final_list_int
+  | n == length message && (take n message) `elem` dictionary = final_list_int
   -- Soit message dans liste et n+1 <= length(message)
   -- Si le patern créé avec les n premiers caractères de message est dans le dictionnaire, on prend un caractère de plus
   | (take n message) `elem` dictionary = compress_method message (n+1) list_int dictionary
