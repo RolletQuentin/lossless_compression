@@ -2,4 +2,18 @@
 
     \subsubsection{Comparaison Huffmann/Shannon-Fano}
 
+    La différence entre Huffman et Shannon-Fano est l'approche du codage. L'approche de Shannon-Fano est descendante, c'est-à-dire que l'on commence par le symbole le plus fréquent et on descend jusqu'au symbole le moins fréquent. L'approche de Huffman est ascendante, c'est-à-dire que l'on commence par les symboles les moins fréquents et on remonte jusqu'au symbole le plus fréquent.
+
+    \medskip
+
+    Le problème de l'approche descendante, c'est que l'on ne peut pas garantir que le code obtenu soit optimal. :En effet, lorsqu'il n'est pas possible de diviser les symboles en deux groupes de fréquences égales, on ne peut pas garantir que le code obtenu soit optimal. En revanche, l'approche ascendante garantit un code optimal.
+
+    \medskip
+
+    En pratique, on décide plus souvent d'utiliser Huffman que Shannon-Fano car Huffman garantit un code optimal. Cependant, dans le cas où l'on a une liste de symboles triée par fréquence, Shannon-Fano est plus rapide à implémenter que Huffman. De plus, il est généralement plus facile de comprendre le fonctionnement de Shannon-Fano que celui de Huffman.
+
     \subsubsection{Meilleures configurations}
+
+    Pour Huffman, les meilleurs configurations possibles sont celles qui permettent d'obtenir un arbre binaire parfait. C'est-à-dire que l'arbre est complet et que toutes les feuilles sont à la même profondeur. Cela permet d'obtenir un code optimal. Pour obtenir un arbre binaire parfait, il faut que le nombre de symboles soit une puissance de 2. Par exemple, la chaine de caractères "abracadabra" contient 5 symboles différents, il est donc impossible d'obtenir un arbre binaire parfait. Mais la chaine de caractères "perfect tree" contient 8 symboles différents, il est donc possible d'obtenir un arbre binaire parfait.
+
+    Dans le cas de Shannon-Fano, il faut que les symboles soient triées par fréquence pour obtenir un code optimal. Cependant, il est possible d'obtenir un code optimal sans que les symboles soient triées par fréquence. Cela dépend de la distribution des fréquences des symboles.
