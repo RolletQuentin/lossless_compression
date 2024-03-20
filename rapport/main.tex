@@ -9,53 +9,63 @@
 \RequirePackage{float} %Pour placement d'images
 \RequirePackage{graphicx} %Paquet pour insérer des images
 \RequirePackage[justification=centering]{caption} %Pour les légendes centralisées
-\RequirePackage{subcaption}
-\RequirePackage{wallpaper}
-\RequirePackage{nomencl}
-%\makenomenclature
 \RequirePackage{fancyhdr}
-%\pagestyle{fancy}
-%\fancyheadoffset{1cm}
-\setlength{\headheight}{2cm}
+\setlength{\headheight}{32.80278pt}
 \RequirePackage{url}
 \RequirePackage[hidelinks]{hyperref}%Paquet pour insérer légendes dans des sous-figures comme Figure 1a, 1b
 \RequirePackage[left=2.5cm,right=2.5cm,top=4cm,bottom=4cm]{geometry} %Configuration de la page
 \RequirePackage{tikz}
-\RequirePackage{pdfpages}
+\RequirePackage{pdfpages} % Pour inclure des PDF
 
+% Paramètres de césure
+\pretolerance=5000
+\tolerance=9000
+\emergencystretch=0pt
+\hyphenpenalty=500
+\hbadness=3000
 
-\chead{} %Affichage du logo entreprise au top center de la page
+\chead{}
 \lhead{\includegraphics[height=1cm]{./assets/cytech.png}}
 \rhead{}
-\rfoot{2023}
+\rfoot{}
 \cfoot{\thepage}
-\lfoot{Quentin Rollet}
+\lfoot{}
 
 \title{Stage ING1}
 
 \begin{document}
 
-% Page de garde
-
+% ------------------------------------------
+% Cover page
+% ------------------------------------------
+% ------------------------------------------
+% Cover page
+% ------------------------------------------
 \begin{titlepage}
-	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-	\center{
-        \textsc{\LARGE
-        \includegraphics[height=5cm]{./assets/cytech.png}
-        } \\[1cm]
-        
-        \HRule\\[0.4cm]
-        { \huge \bfseries Compression sans perte de données \\[0.15cm] }
-        \HRule\\[1.5cm]
+    \thispagestyle{empty}
+    \begin{center}
+        \includegraphics[scale=0.1]{assets/CY_Tech.png}
 
-        Romain Dujol\\
-        
-        2023--2024\\[5cm]
-        
-        Quentin ROLLET\\
-	ING2
-    }
+        \vfill
 
+        \rule{\textwidth}{1pt}\\[0.5cm]
+        {\Huge Programmation fonctionnelle}\\[0.5cm]
+        {\Large \textbf{Projet : Méthodes de compression sans perte}}\\[0.5cm]
+        \rule{\textwidth}{1pt}
+
+        \vfill
+
+        Effectué du 12 Février au 31 Mars 2024\\[0.5cm]
+
+        par\\[0.5cm]
+
+        Patrice SOULIER, Quentin ROLLET, Marc-Antoine VERGNET, Valentin NOAILLES\\[0.5cm]
+
+        
+        \vfill
+    
+        Enseignant : \textit{Romain DUJOL}
+    \end{center}
 \end{titlepage}
 
 % Supprime la numérotation sur la page de garde
@@ -71,9 +81,9 @@
 
 \include{introduction/introduction}
 
-\include{conception/conception}
+% \include{conception/conception}
 
-\include{implementation/implementation}
+% \include{implementation/implementation}
 
 \include{lossless_compression_method_study/lossless_compression_method_study}
 

@@ -1,1 +1,31 @@
 \subsection{Mise en place des tests}
+
+La mise en place des tests permet d'assurer tout au long du projet que les fonctionnalités implémentées fonctionnent. Dans le cadre de ce projet ou l'on avait déjà la signature des différentes fonction à implémenter, il a été tout à fait naturel d'écrire les tests avant le développement de celles-ci. Même si ceux-ci peuvent être amenés à être changés car il n'est pas possible de tester les tests avant d'avoir les fonctions implémentés, cela permet de gagner un temps certain durant le projet car il permet de déceler imédiatements les différents bugs qui peuvent survenir.
+
+\medskip
+
+Nous allons donc présenter les deux librairies de tests que nous avons utiliser dans le projet qui sont HUnit et QuickCheck.
+
+    \subsubsection{Hunit}
+
+        HUnit est une librairie de test pour Haskell qui est inspirée de JUnit pour Java. Cette librairie de test est utilisée pour faire des tests unitaires, c'est-à-dire des tests qui permettent de vérifier que des parties spécifiques du code fonctionne.
+
+        \smallskip
+
+        La plupart du temps, on teste des fonctions avec plusieurs valeurs d'entrées, de manière à faire en sorte que l'on passe par toutes les lignes de code de la fonction. Il faut alors varier les paramètres d'entrés afin d'essayer toutes les conditions présentent dans le code.
+
+        \smallskip
+
+        Il faut donc aussi préciser à HUnit quelle est la valeur de sortie attendue. HUnit se charge alors de nous prévenir si la valeur de sortie de la fonction n'est pas celle que l'on voulait.
+
+    \subsubsection{QuickCheck}
+
+        La philosophie de QuickCheck est différente de HUnit, ce qui apporte une complémentarité entre les deux librairies de tests.
+
+        \smallskip
+
+        En effet, QuickCheck est une librairie de test permettant de tester des propriétés sur des entrées aléatoires. Dans le cas de notre projet, on aimerait tester sur un grand nombre de messages différents la succession des l'algorithme de compression puis l'algorithme de décompression. Comme on est sur des algorithmes sans pertes de données, le message en entrée et le message en sortie doivent être identiques.
+
+        \smallskip
+
+        QuickCheck permet facilement de faire ceci. Il suffit de lui donner la structure de données adéquate et il est capable de générer aléatoirement cette structure de données. Il va ensuite appliquer les fonctions à appliquer puis de tester une propriété sur les données en sortie.
