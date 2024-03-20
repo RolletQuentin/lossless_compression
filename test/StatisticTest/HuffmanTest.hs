@@ -19,5 +19,5 @@ testHuffmanTree = TestList
     [ 
         "Huffman Tree - Empty Input" ~: tree ([] :: [Char]) ~?= Nothing,
         "Huffman Tree - Single Symbol" ~: tree "a" ~?= Just (EncodingLeaf 1 'a'),
-        "Huffman Tree - Multiple Symbols" ~: toGenericTree <$> tree "aabcc" ~?= Just (toGenericTree (EncodingNode 5 (EncodingLeaf 2 'c') (EncodingNode 3 (EncodingLeaf 1 'b') (EncodingLeaf 2 'a'))))
+        "Huffman Tree - Multiple Symbols" ~: toGenericTree <$> tree "aabcc" ~?= Just (toGenericTree (EncodingNode 5 (EncodingLeaf 2 'a') (EncodingNode 3 (EncodingLeaf 1 'b') (EncodingLeaf 2 'c'))))
     ]

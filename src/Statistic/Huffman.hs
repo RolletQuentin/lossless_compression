@@ -17,7 +17,7 @@ tree string =
   case (orderedCounts string) of
     []             -> Nothing
     [(ltr, nbr)]   -> Just (EncodingLeaf nbr ltr)
-    otherwise      -> Just (buildTree (copyToLeaf (orderedCounts string) []))
+    otherwise      -> Just (buildTree (sortBy (comparing snd) (copyToLeaf (orderedCounts string) [])))
   where
     copyToLeaf :: [(a, Int)] -> [((EncodingTree a), Int)] -> [((EncodingTree a), Int)]
     copyToLeaf [] newList = newList
