@@ -58,4 +58,30 @@ compress_method message n list_int dictionary
 -- | LZW uncompress method
 -- If input cannot be uncompressed, returns `Nothing`
 uncompress :: [Int] -> Maybe String
-uncompress _ = undefined -- TODO
+
+-- Condition d'arrêt message vide
+uncompress [] = Nothing
+uncompress code = uncompress_method new_code decode w ascii
+  where
+      v = head code -- La première valeur du code
+      w = ascii !! v -- La lettre qui correspond à l'indice de v dans le dictionnaire
+      decode = w
+      new_code = tail code -- On ne garde que les nombres non déchiffré dans la liste code
+
+uncompress_method :: [Int] -> String -> String -> [String] -> Maybe String
+-- uncompress_method (code, decode, w, dictionary) = new_decode
+uncompress_method code decode w dictionary
+  -- Cas d'arrêt : code est vide
+  | length code < 1 = Just decode
+  -- Si la lettre correspondant à l'indice du code est dans le dictionary, on l'add à decode et on ajoute au dictionary (w + new_w[0])
+  | new_w `elem` dictionary = uncompress_method new_code (decode ++ new_w) new_w (dictionary ++ [(w ++ [head new_w])]) 
+  -- Sinon, on a new_w = w + w[0] et on ajoute également new_w au dictionnaire
+  | otherwise = uncompress_method new_code (decode ++ (w ++ [head w])) (w ++ [head w]) (dictionary ++ [(w ++ [head w])]) 
+  where 
+    v = head code -- Prochain nombre du code à déchiffrer
+    new_code = tail code -- On ne garde que les nombres non déchiffré dans la liste code
+    new_w = ascii !! v -- Valeur dans le dictionnaire correspondant à l'indice du code à déchiffrer
+
+
+
+
