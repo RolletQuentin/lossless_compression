@@ -25,7 +25,7 @@ testEntropy = TestList
         "Empty input" ~: entropy "" ~?= 0.0,
         "Single character input" ~: entropy "a" ~?= 0.0,
         "Equal probabilities" ~: entropy "abcd" ~?= 2.0,
-        "Unequal probabilities" ~: entropy "aabbc" ~?= 1.521089
+        "Unequal probabilities" ~: entropy "aabbc" ~?= 1.5219280948873621
     ]
 
 -- Test cases for orderedCounts function

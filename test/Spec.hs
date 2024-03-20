@@ -32,14 +32,14 @@ main = do
     quickCheck propertyLZ78CompressUncompress
     putStrLn "LZ78 tests are finnished.\n"
 
-    -- putStrLn "Running test for LZW..."
-    -- _ <- runTestTT $ TestList
-    --     [
-    --         LZTest.LZWTest.testLZWCompress,
-    --         LZTest.LZWTest.testLZWUncompress
-    --     ]
-    -- quickCheck propertyLZWCompressUncompress
-    -- putStrLn "LZW tests are finnished.\n"
+    putStrLn "Running test for LZW..."
+    _ <- runTestTT $ TestList
+        [
+            LZTest.LZWTest.testLZWCompress,
+            LZTest.LZWTest.testLZWUncompress
+        ]
+    quickCheck propertyLZWCompressUncompress
+    putStrLn "LZW tests are finnished.\n"
 
     putStrLn "Running test for Encoding Tree..."
     _ <- runTestTT $ TestList
@@ -47,7 +47,7 @@ main = do
             StatisticTest.EncodingTreeTest.testEncodingTree
         ]
     quickCheck propertyHuffmanCompressUncompress
-    -- quickCheck propertyShannonFanoCompressUncompress
+    quickCheck propertyShannonFanoCompressUncompress
     putStrLn "Encoding Tree tests are finnished.\n"
 
     putStrLn "Running test for Huffman..."
@@ -57,18 +57,18 @@ main = do
         ]
     putStrLn "Huffman tests are finnished.\n"
 
-    -- putStrLn "Running test for Shannon-Fano..."
-    -- _ <- runTestTT $ TestList
-    --     [
-    --         StatisticTest.ShannonFanoTest.testShannonFano
-    --     ]
-    -- putStrLn "Shannon-Fano tests are finnished.\n"
+    putStrLn "Running test for Shannon-Fano..."
+    _ <- runTestTT $ TestList
+        [
+            StatisticTest.ShannonFanoTest.testShannonFano
+        ]
+    putStrLn "Shannon-Fano tests are finnished.\n"
 
     putStrLn "Running test for Source..."
     _ <- runTestTT $ TestList
         [
             StatisticTest.SourceTest.testOccurrences,
-            -- StatisticTest.SourceTest.testEntropy,
+            StatisticTest.SourceTest.testEntropy,
             StatisticTest.SourceTest.testOrderedCounts
         ]
     putStrLn "Source tests are finnished.\n"
