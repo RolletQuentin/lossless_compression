@@ -7,26 +7,18 @@
 module LZ.LZW(compress, uncompress) where
 
 import LZ.Dictionaries
-
--- !!!!!!!!!!!!!!! VOIR SI AUTORISEE SINON RECODER A LA MAIN !!!!!!!!!!!!!!!
--- Val a dit autorisé
 import Data.List (elemIndex)
--- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 
 -- | LZW compress method
 compress :: String -> [Int]
 compress [] = []
 compress message = compress_method message 1 [] ascii
 
+-- compress_method(message, n, code, dictionnaire) = code
 compress_method :: String -> Int -> [Int] -> [String] -> [Int]
--- Correspond à :  compress_method(message, n, code, dictionnaire) = code
-  
+
 -- Condition d'arrêt message vide
 compress_method [] _ list_int _ = list_int
-  
-
 -- Tous les autres cas
 compress_method message n list_int dictionary
   -- Condition d'arrêt, length(message) = n  <=>  mon dernier patern est un patern que je connais.
@@ -68,8 +60,9 @@ uncompress code = uncompress_method new_code decode w ascii
       decode = w
       new_code = tail code -- On ne garde que les nombres non déchiffré dans la liste code
 
-uncompress_method :: [Int] -> String -> String -> [String] -> Maybe String
 -- uncompress_method (code, decode, w, dictionary) = new_decode
+uncompress_method :: [Int] -> String -> String -> [String] -> Maybe String
+
 uncompress_method code decode w dictionary
   -- Cas d'arrêt : code est vide
   | length code < 1 = Just decode
@@ -81,7 +74,3 @@ uncompress_method code decode w dictionary
     v = head code -- Prochain nombre du code à déchiffrer
     new_code = tail code -- On ne garde que les nombres non déchiffré dans la liste code
     new_w = if v < length dictionary then dictionary !! v else w ++ [head w] -- Valeur dans le dictionnaire correspondant à l'indice du code à déchiffrer ou si il n'y a pas cet indice dans le dictionnaire on prend w + w[0]
-
-
-
-
