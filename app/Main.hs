@@ -1,6 +1,7 @@
 module Main (main) where
 
 import RLE
+import LZ.LZ78
 import Statistic.EncodingTree
 import Statistic.Huffman
 import Statistic.ShannonFano
@@ -23,3 +24,8 @@ main = do
     print shanonCompressed
     let shanonUncompressed = Statistic.EncodingTree.uncompress (shanontree, shanonCompressed)
     print shanonUncompressed
+
+    let text2 = "papapapa"
+
+    let lz78Compressed = LZ.LZ78.compress text2
+    print lz78Compressed
